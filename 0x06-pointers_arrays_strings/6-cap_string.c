@@ -9,8 +9,8 @@
 char *cap_string(char *str)
 {
 	int i, j;
-	char reference[13] = {' ', '\n', ',', ';', '.', '!', '?',
-		'"', '(', ')', 123, 125, 9};
+	char reference[13] = {' ', '\n', ',', ';', '.', '!', '?', '"', '(', ')',
+			123, 125, 9};
 
 	i = 0;
 	if (str == NULL)
