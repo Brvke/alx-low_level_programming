@@ -3,8 +3,8 @@
 #include <stdlib.h>
 
 /**
- * free_dog - free the doggos
- * @d: doggo
+ * free_dog - free the dogs
+ * @d: dog
  */
 
 void free_dog(dog_t *d)
