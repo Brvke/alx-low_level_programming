@@ -9,41 +9,31 @@
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {
 	unsigned int icount;
-	listint_t *temp, *newnode, *prenode;
+	listint_t *current, *newnode;
 
 	newnode = malloc(sizeof(listint_t));
-	prenode = malloc(sizeof(listint_t));
-	if (head == NULL || newnode == NULL || prenode == NULL)
+	if (!newnode)
 		return (NULL);
-
-	temp = *head;
-	icount = 0;
 	newnode->n = n;
-	if (idx == 0 && *head == NULL)
+
+	if (!(*head))
 	{
 		newnode->next = NULL;
 		return (newnode);
 	}
-	else if (idx == 0 && *head != NULL)
+	current = (*head);
+
+	icount = 0;
+	while (icount != (idx - 1) && current)
 	{
-		prenode = *head;
-		newnode->next= prenode;
-		*head = newnode;
-		return (*head);
-	}
-	while (icount < idx)
-	{
-		if(temp != NULL)
-			temp = temp->next;
-		else
-		{
-			printf("outside of range");
-			return (NULL);
-		}
+		current = current->next;
 		icount++;
 	}
-	prenode = temp->next;
-	temp->next = newnode;
-	newnode->next = prenode;
+
+	if (icount != (idx - 1))
+		return (NULL);
+	newnode->next = current->next;
+	current->next = newnode;
+
 	return (newnode);
 }
