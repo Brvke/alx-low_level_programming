@@ -1,18 +1,21 @@
-#include <stdlib.h>
 #include "dog.h"
+#include <stdlib.h>
 
-typedef struct
-{
-    char *name;
-    int age;
-}
-	dog_t;
+/**
+ * free_dog - function that frees the space
+ * allocated for the dog struct
+ *
+ * @d: pointer to the dog struct
+ *
+ * Return: Nothing.
+ */
 
 void free_dog(dog_t *d)
 {
-    if (d != NULL)
-    {
-        free(d->name);
-        free(d);
-    }
+	if (d)
+	{
+		free(d->name);
+		free(d->owner);
+		free(d);
+	}
 }
