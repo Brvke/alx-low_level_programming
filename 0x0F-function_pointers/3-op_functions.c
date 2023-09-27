@@ -1,73 +1,69 @@
-#include "3-calc.h"
-#include <stdio.h>
-#include <stdlib.h>
-
 /**
- * op_add - sum of two numbers
- * @a: first integer
- * @b: second integer
- * Return: sum
- */
+ * op_add - adds @a and @b
+ *
+ * @a: input 1
+ * @b: input 2
+ *
+ * Return: sum of @a and @b
+*/
 
 int op_add(int a, int b)
 {
 	return (a + b);
 }
 
-/**
- * op_sub - difference between two numbers
- * @a: first integer
- * @b: second integer
- * Return: difference (integer)
- */
 
+/**
+ * op_sub - gets the difference of @a and @b
+ *
+ * @a: input 1
+ * @b: input 2
+ *
+ * Return: difference of @a and @b
+*/
 int op_sub(int a, int b)
 {
 	return (a - b);
 }
 
-/**
- * op_mul - product of two numbers
- * @a: first int
- * @b: second int
- * Return: product
- */
 
+/**
+ * op_mul - multiplies @a and @b
+ *
+ * @a: input 1
+ * @b: input 2
+ *
+ * Return: product of @a and @b
+*/
 int op_mul(int a, int b)
 {
 	return (a * b);
 }
 
-/**
- * op_div - quotient of two num
- * @a: first int
- * @b: second int
- * Return: quotient
- */
 
+/**
+ * op_div - divides @a by @b
+ *
+ * @a: input 1
+ * @b: input 2
+ *
+ * Return: results of the division @a and @b
+*/
 int op_div(int a, int b)
 {
-	if (b == 0)
-	{
-		printf("Error\n");
-		exit(100);
-	}
 	return (a / b);
 }
 
-/**
- * op_mod - remainder
- * @a: first int
- * @b: second int
- * Return: remainder of division
- */
 
+/**
+ * op_mod - gets the reminder of the division between @a and @b
+ *
+ * @a: input 1
+ * @b: input 2
+ *
+ * Return: the remainder
+*/
 int op_mod(int a, int b)
 {
-	if (b == 0)
-	{
-		printf("Error\n");
-		exit(100);
-	}
 	return (a % b);
 }
