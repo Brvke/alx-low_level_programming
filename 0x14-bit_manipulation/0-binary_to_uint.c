@@ -5,14 +5,6 @@
  * Return: converted int
  */
 
-int power(int base, int exp)
-{
-	if (exp != 0)
-		return (base * power(base, exp - 1));
-	else
-		return (1);
-}
-
 unsigned int binary_to_uint(const char *b)
 {
 	int i, dec, len;
@@ -44,4 +36,18 @@ unsigned int binary_to_uint(const char *b)
 	}
 
 	return (dec / 2);
+}
+/**
+ * power - returns the result of multiplying the base exp times.
+ * @base: base
+ * @exp: used as a multiplier.
+ * Return: the result.
+ */
+
+int power(int base, int exp)
+{
+	if (exp != 0)
+		return (base * power(base, exp - 1));
+	else
+		return (1);
 }
