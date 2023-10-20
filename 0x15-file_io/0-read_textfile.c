@@ -26,15 +26,15 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 	}
 
-	bytes_read = read(file_desc, buff, letters); /* Read file into buffer */
-	if (bytes_read == -1)
+	check_read = read(file_desc, buff, letters); /* Read file into buffer */
+	if (check_read == -1)
 	{
 		free(buff);
 		close(file_desc);
 		return (0);
 	}
 
-	bytes_written = write(STDOUT_FILENO, buff, check_read);
+	check_written = write(STDOUT_FILENO, buff, check_read);
 	if (check_written == -1 || ((size_t)check_written != (size_t)check_read))
 	{
 		free(buff);
