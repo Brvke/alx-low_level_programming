@@ -1,46 +1,49 @@
 #include "main.h"
 
 /**
- * read_textfile - a function that reads a text file and prints it
- *                to POSIX stdout
- * @filename: is the name of the file to read
- * @letters: number of the letters to read and print from file
- * Return: 0 if it fails or actual number of letters it could
- *         read and print
-*/
+ * read_textfile - reads a text file and prints it to the POSIX standard output
+ * @filename: Name of the text file to be read
+ * @letters: Number of letters that should be read and printed
+ * Return: Actual number of letters it could read and print
+ */
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int file;
-	ssize_t read_check, wcount;
-	char *buffer;
+	int check_read, check_written, file_desc;
+	char *buff;
 
-	if (filename == NULL)
+	if (!filename)
 		return (0);
 
-	file = open(filename, O_RDONLY);
-
-	if (file == -1)
+	buff = malloc(sizeof(char) * letters + 1); /* Allocate buff for reading */
+	if (!buff)
 		return (0);
 
-	buffer = malloc(sizeof(char) * letters);
-	if (buffer == NULL)
+	file_desc = open(filename, O_RDONLY); /* Open file for reading only */
+	if (file_desc == -1)
 	{
-		free(buffer);
+		free(buff);
 		return (0);
 	}
 
-	chexk_read = read(file, buffer, letters);
-	if (check_read == -1)
+	bytes_read = read(file_desc, buff, letters); /* Read file into buffer */
+	if (bytes_read == -1)
+	{
+		free(buff);
+		close(file_desc);
 		return (0);
+	}
 
-	pcount = write(STDOUT_FILENO, buffer, check_read);
-	if (pcount == -1 || check_read != pcount)
+	bytes_written = write(STDOUT_FILENO, buff, check_read);
+	if (check_written == -1 || ((size_t)check_written != (size_t)check_read))
+	{
+		free(buff);
+		close(file_desc);
 		return (0);
+	}
 
-	free(buffer);
+	free(buff);
+	close(file_desc);
 
-	close(file);
-
-	return (wcount);
+	return (check_written);
 }
