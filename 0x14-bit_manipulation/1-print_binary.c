@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 /**
  * print_binary - a recursive function that print binary
  * @n: decimal number
