@@ -1,58 +1,46 @@
 #include "main.h"
-
 /**
- * binary_to_uint - converts binary in string to
- * unsigned int.
- * @b: pointer to string.
- * Return: integer representation of the binary
- * if successful, 0 otherwise.
- */
+* _pow - similar to pow in maths.h
+* @x: base of power function
+* @y: exponent of power function
+* Return: answer to x raise to y
+*/
+unsigned int _pow(int x, int y)
+{
+	int i;
+	unsigned int ans;
 
+	ans = 1;
+
+	for (i = 0 ; i < y ; i++)
+		ans = ans * x;
+
+	return (ans);
+}
+/**
+* binary_to_uint - changes binary to unsigned int
+* @b: string of a binary number
+* Return: an unisgned in value or o
+*/
 unsigned int binary_to_uint(const char *b)
 {
-	int ct, res, len;
+	int i, power;
+	unsigned int binary;
+	binary = power = 0;
 
-	if (!b)
+	if (b == NULL)
 		return (0);
-	ct = 0;
-	while (b[ct] != '\0')
+
+	for (i = 0 ; b[i] != '\0' ; i++)
 	{
-		if (b[ct] == '0' || b[ct] == '1')
-			ct++;
+		if (b[i] == 49 || b[i] == 48)
+			;
 		else
 			return (0);
 	}
-	len = ct;
-	res = 0;
-	while (ct >= 0)
+	for (i-- ; i >= 0 ; power++, i--)
 	{
-		if (b[ct] == '0')
-		{
-			ct--;
-			continue;
-		}
-		else if (b[ct] == '1')
-		{
-			res += power(2, (len - ct));
-		}
-		ct--;
+		binary = binary + ((b[i] - 48) * _pow(2, power));
 	}
-
-	return (res / 2);
-}
-
-/**
- * power - returns the result of multiplying
- * the base a times.
- * @base: the base of the power eqn.
- * @a: the number used as a multiplier
- * Return: the result of multiplying the base a times.
- */
-
-int power(int base, int a)
-{
-	if (a != 0)
-		return (base * power(base, a - 1));
-	else
-		return (1);
+	return (binary);
 }
