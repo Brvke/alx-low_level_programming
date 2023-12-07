@@ -1,49 +1,72 @@
 #include "lists.h"
+
 /**
- * insert_dnodeint_at_index - a function that inserts a node at
- *                            the nth of a doubly linked list
+ * dlistint_len - returns the number of elements in a dlistint_t list
+ * @h: head of doubly linked list
+ * Return: number of nodes
+ */
+
+size_t dlistint_len(const dlistint_t *h)
+{
+	int count = 0;
+
+	while (h)
+	{
+		count++;
+		h = h->next;
+	}
+	return (count);
+}
+
+/**
+ * insert_dnodeint_at_index - inserts a new node at a given position
+ * @h: head of linked list
+ * @idx: index
+ * @n: integer value of node
  *
- * @h: a pointer to the linked list first pointer
- * @idx: the index of the node to be added counted form 0
- * @n:value of n at the idx node
- *
- * Return: a pointer the new node or NULL
-*/
+ * Return: address of new node, return NULL if fails
+ */
+
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 {
-	dlistint_t *new, *curr;
-	unsigned int cur_idx;
+	dlistint_t *new, *temp;
+	size_t length;
+	unsigned int i = 0;
+
+	if (h == NULL)
+		return (NULL);
+	if (idx == 0)
+		return (add_dnodeint(h, n));
+
+	length = dlistint_len(*h);
+	if (idx == length - 1)
+		return (add_dnodeint_end(h, n));
 
 	new = malloc(sizeof(dlistint_t));
-	if (!new || !*h)
-	{
-		free(new);
+	if (new == NULL)
 		return (NULL);
-	}
 	new->n = n;
-	new->next = NULL;
-	new->prev = NULL;
-	if (idx == 0)
+	if (*h == NULL)
 	{
-		new->next = *h;
-		(*h)->prev = new;
+		new->prev = NULL;
+		new->next = NULL;
 		*h = new;
-		return (*h);
+		return (new);
 	}
-	cur_idx = 0;
-	curr = *h;
-	while (curr)
+	temp = *h;
+	while (temp)
 	{
-		if (cur_idx == idx)
+		if (i == idx)
 		{
-			new->next = curr;
-			new->prev = curr->prev;
-			new->prev->next = new;
-			curr->prev = new;
+			new->next = temp;
+			new->prev = temp->prev;
+			temp->prev->next = new;
+			temp->prev = new;
 			return (new);
 		}
-		curr = curr->next;
-		cur_idx++;
+		temp = temp->next;
+		i++;
 	}
+	free(new);
 	return (NULL);
 }
